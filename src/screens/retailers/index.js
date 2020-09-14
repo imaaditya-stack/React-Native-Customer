@@ -1,8 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { Text, FlatList, TouchableOpacity } from 'react-native';
 import { styles } from '../../styles';
-import Icon from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Button, Divider, Dialog, Portal } from 'react-native-paper';
@@ -26,7 +25,7 @@ export default class Retailers extends React.Component {
     axios
       .get('http://192.168.0.106:8000/api/lounge/products')
       .then((response) => this.setState({ data: response.data }))
-      .then((error) => console.error(error));
+      .catch((error) => console.error(error));
   };
 
   openDialog = () => {

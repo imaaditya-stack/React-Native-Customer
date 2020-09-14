@@ -62,7 +62,7 @@ class Register extends React.Component {
               <Icon
                 name="arrow-circle-right"
                 size={RFValue(60)}
-                color="#93bdfd"
+                color={PRIMARY_COLOR}
               />
             </TouchableOpacity>
             <View style={{ flexDirection: 'row' }}>

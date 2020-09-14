@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { FONT_FAMILY_REGULAR, FONT_FAMILY_BOLD } from './typography';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -24,22 +25,22 @@ const styles = StyleSheet.create({
     backgroundColor: SECONDARY_COLOR,
   },
   whiteText: {
-    fontFamily: 'Jost-Medium',
+    fontFamily: FONT_FAMILY_REGULAR,
     fontSize: RFValue(18),
     color: WHITE_COLOR,
   },
   greyText: {
-    fontFamily: 'Jost-Medium',
+    fontFamily: FONT_FAMILY_REGULAR,
     fontSize: RFValue(18),
     color: GREY_COLOR,
   },
   boldText: {
-    fontFamily: 'Jost-Bold',
+    fontFamily: FONT_FAMILY_BOLD,
     fontSize: RFValue(18),
     color: WHITE_COLOR,
   },
   whitebutton: {
-    backgroundColor: '#fafafa',
+    backgroundColor: WHITE_COLOR,
     padding: 20,
     borderRadius: 40,
     elevation: 5,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     padding: 15,
     color: GREY_COLOR,
     fontSize: RFValue(18),
-    fontFamily: 'Jost-Medium',
+    fontFamily: FONT_FAMILY_REGULAR,
     backgroundColor: '#f7f9fb',
     borderWidth: 1,
     borderColor: '#ccc',

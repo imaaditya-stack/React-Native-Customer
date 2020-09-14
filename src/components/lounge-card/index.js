@@ -4,6 +4,7 @@ import { Text, View } from 'react-native';
 import { styles } from '../../styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { PRIMARY_COLOR } from '../../styles/colors';
 
 class Lounge extends Component {
   render() {
@@ -23,15 +24,12 @@ class Lounge extends Component {
             <View style={{ flexDirection: 'row' }}>
               <MaterialCommunityIcons
                 name="clock-time-three-outline"
-                color="#93bdfd"
+                color={PRIMARY_COLOR}
                 size={RFValue(20)}
               />
               <Text
                 allowFontScaling={false}
-                style={[
-                  styles.greyText,
-                  { color: '#999', fontSize: RFValue(15) },
-                ]}>
+                style={[styles.greyText, { fontSize: RFValue(15) }]}>
                 {' '}
                 {this.props.date}
               </Text>

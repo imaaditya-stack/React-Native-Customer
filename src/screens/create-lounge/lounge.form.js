@@ -1,14 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { styles } from '../../styles';
-import { RFValue } from 'react-native-responsive-fontsize';
 
 export default class LoungeForm extends Component {
   render() {
