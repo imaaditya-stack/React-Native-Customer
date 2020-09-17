@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
@@ -16,7 +17,37 @@ import Images from '../../assets/images/config';
 import { styles } from '../../styles';
 import { PRIMARY_COLOR } from '../../styles/colors';
 
+import { connect } from 'react-redux';
+import { registerUser } from '../../redux/actions';
+
 class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+    };
+  }
+
+  handleName = (value) => {
+    this.setState({ name: value });
+  };
+
+  handleEmail = (value) => {
+    this.setState({ email: value });
+  };
+
+  handlePassword = (value) => {
+    this.setState({ password: value });
+  };
+
+  handleSubmit = () => {
+    const { name, email, password } = this.state;
+    this.props.registerUser(name, email, password);
+    this.props.navigation.navigate('phonenumber');
+  };
+
   render() {
     return (
       <>
@@ -38,6 +69,7 @@ class Register extends React.Component {
               autoCapitalize="none"
               placeholder="Name"
               placeholderTextColor="#999"
+              onChangeText={this.handleName}
             />
             <TextInput
               allowFontScaling={false}
@@ -46,6 +78,7 @@ class Register extends React.Component {
               autoCapitalize="none"
               placeholderTextColor="#999"
               name="name"
+              onChangeText={this.handleEmail}
             />
             <TextInput
               allowFontScaling={false}
@@ -53,12 +86,9 @@ class Register extends React.Component {
               autoCapitalize="none"
               placeholder="Password"
               placeholderTextColor="#999"
+              onChangeText={this.handlePassword}
             />
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={() => {
-                this.props.navigation.navigate('phonenumber');
-              }}>
+            <TouchableOpacity activeOpacity={0.5} onPress={this.handleSubmit}>
               <Icon
                 name="arrow-circle-right"
                 size={RFValue(60)}
@@ -85,4 +115,10 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+const mapDispatchToProps = (dispatch) => ({
+  registerUser: (name, email, password) => {
+    dispatch(registerUser(name, email, password));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(Register);

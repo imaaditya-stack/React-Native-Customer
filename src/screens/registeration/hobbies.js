@@ -12,7 +12,26 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import Content from '../../components/skip-screens-content';
 import Images from '../../assets/images/config';
 
+import { connect } from 'react-redux';
+import { addHobbies } from '../../redux/actions';
+
 class Hobbies extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hobbies: '',
+    };
+  }
+
+  handleHobbies = (value) => {
+    this.setState({ hobbies: value });
+  };
+
+  handleSubmit = () => {
+    this.props.addHobbies(this.state.hobbies);
+    this.props.navigation.navigate('profession');
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -25,12 +44,9 @@ class Hobbies extends React.Component {
               autoCapitalize="none"
               placeholder="Reading, Travelling, ..."
               placeholderTextColor="#999"
+              onChangeText={this.handleHobbies}
             />
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={() => {
-                this.props.navigation.navigate('profession');
-              }}>
+            <TouchableOpacity activeOpacity={0.5} onPress={this.handleSubmit}>
               <Text
                 style={[styles.greyText, { fontSize: RFValue(15) }]}
                 allowFontScaling={false}>
@@ -44,4 +60,10 @@ class Hobbies extends React.Component {
   }
 }
 
-export default Hobbies;
+const mapDispatchToProps = (dispatch) => ({
+  addHobbies: (hobbies) => {
+    dispatch(addHobbies(hobbies));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(Hobbies);

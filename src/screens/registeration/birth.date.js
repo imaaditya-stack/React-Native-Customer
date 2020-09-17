@@ -7,16 +7,22 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Content from '../../components/skip-screens-content';
 import Images from '../../assets/images/config';
 
+import { connect } from 'react-redux';
+import { addBirthDate } from '../../redux/actions';
+
 class Birth extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      birthDate: null,
       visible: false,
     };
   }
 
   onDateChange = (event, selectedDate) => {
-    this.setState({ Birth_date: selectedDate, visible: false });
+    this.setState({ birthDate: selectedDate, visible: false });
+    this.props.addBirthDate(this.state.birthDate);
+    this.props.navigation.navigate('anniversary');
   };
 
   render() {
@@ -66,4 +72,10 @@ class Birth extends React.Component {
   }
 }
 
-export default Birth;
+const mapDispatchToProps = (dispatch) => ({
+  addBirthDate: (birthDate) => {
+    dispatch(addBirthDate(birthDate));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(Birth);

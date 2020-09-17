@@ -14,8 +14,26 @@ import Container from '../../components/form-info-container';
 import Images from '../../assets/images/config';
 import { styles } from '../../styles';
 import { PRIMARY_COLOR } from '../../styles/colors';
+import { connect } from 'react-redux';
+import { addPhoneNumber } from '../../redux/actions';
 
 class phoneNumber extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      phoneNumber: '',
+    };
+  }
+
+  handlePhoneNumber = (value) => {
+    this.setState({ phoneNumber: value });
+  };
+
+  handleSubmit = () => {
+    this.props.addPhoneNumber(this.state.phoneNumber);
+    this.props.navigation.navigate('birth');
+  };
+
   render() {
     return (
       <>
@@ -37,12 +55,9 @@ class phoneNumber extends React.Component {
               autoCapitalize="none"
               placeholder="Phone number"
               placeholderTextColor="#999"
+              onChangeText={this.handlePhoneNumber}
             />
-            <TouchableOpacity
-              activeOpacity={0.5}
-              onPress={() => {
-                this.props.navigation.navigate('birth');
-              }}>
+            <TouchableOpacity activeOpacity={0.5} onPress={this.handleSubmit}>
               <Icon
                 name="arrow-circle-right"
                 size={RFValue(60)}
@@ -56,4 +71,10 @@ class phoneNumber extends React.Component {
   }
 }
 
-export default phoneNumber;
+const mapDispatchToProps = (dispatch) => ({
+  addPhoneNumber: (PhoneNumber) => {
+    dispatch(addPhoneNumber(PhoneNumber));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(phoneNumber);

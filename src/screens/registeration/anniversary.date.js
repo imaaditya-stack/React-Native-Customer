@@ -7,16 +7,22 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Content from '../../components/skip-screens-content';
 import Images from '../../assets/images/config';
 
+import { connect } from 'react-redux';
+import { addAnniversayDate } from '../../redux/actions';
+
 class Anniversary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
+      anniversary_date: null,
     };
   }
 
   onDateChange = (event, selectedDate) => {
     this.setState({ anniversary_date: selectedDate, visible: false });
+    this.props.addAnniversayDate(this.state.anniversary_date);
+    this.props.navigation.navigate('hobby');
   };
 
   render() {
@@ -66,4 +72,10 @@ class Anniversary extends React.Component {
   }
 }
 
-export default Anniversary;
+const mapDispatchToProps = (dispatch) => ({
+  addAnniversayDate: (anniversaryDate) => {
+    dispatch(addAnniversayDate(anniversaryDate));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(Anniversary);
